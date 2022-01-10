@@ -1,0 +1,4 @@
+hostname,staging,ztp,mac,serial,mgmtint,mgmtip,mgmtmask,mgmtgateway,mgmtvrf
+Leaf1,,TRUE,50:00:00:03:37:66,A0B0F3A3D6EB391ED5116F5964C56BB1,management1,172.17.101.50,/24,172.17.101.1,mgmt
+Leaf2,,TRUE,50:00:00:cb:38:c2,,management1,172.17.101.51,/24,172.17.101.1,mgmt
+Leaf3,,TRUE,50:00:00:d5:5d:c0,,management1,172.17.101.52,/24,172.17.101.1,mgmt

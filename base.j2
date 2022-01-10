@@ -1,0 +1,27 @@
+hostname {{hostname}}
+
+{% if 'default' in mgmtvrf %}
+
+interface {{mgmtint}}
+    ip address {{mgmtip}}{{mgmtmask}}
+
+ip route 0.0.0.0/0 {{mgmtgateway}}
+
+daemon TerminAttr
+    exec /usr/bin/TerminAttr -ingestgrpcurl={{cvp}}:9910 -cvcompression=gzip -ingestauth=key,arista -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent -ingestvrf=default -taillogs
+    no shut
+
+{% else %}
+
+vrf instance {{mgmtvrf}}
+
+interface {{mgmtint}}
+    vrf {{mgmtvrf}}
+    ip address {{mgmtip}}{{mgmtmask}}
+
+ip route vrf {{mgmtvrf}} 0.0.0.0/0 {{mgmtgateway}}
+
+daemon TerminAttr
+    exec /usr/bin/TerminAttr -ingestgrpcurl={{cvp}}:9910 -cvcompression=gzip -ingestauth=key,arista -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent -ingestvrf={{mgmtvrf}} -taillogs
+    no shut
+{% endif %}
