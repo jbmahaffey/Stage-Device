@@ -144,7 +144,7 @@ def Container(clnt, data):
                 return 'success'
     except:
         logging.info('Error getting staging container.')
-        return 'Failure'
+        return 'failure'
 
 
 ######################################
