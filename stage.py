@@ -11,6 +11,7 @@ import ssl
 import logging
 from jinja2 import Environment, FileSystemLoader
 ssl._create_default_https_context = ssl._create_unverified_context
+requests.packages.urllib3.disable_warnings()
 
 #################
 # Main function #
