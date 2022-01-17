@@ -130,7 +130,6 @@ def Container(clnt, data):
     try:
         if data['staging'] != '':
             staging = clnt.api.get_container_by_name(name=data['staging'])
-            print(staging)
             if staging == None:
                 clnt.api.add_container(container_name=data['staging'], parent_name='Tenant', parent_key='root')
                 return 'success'
@@ -238,7 +237,7 @@ def Configlet(clnt, data, cvp, user, password):
 ##############################################
 def AssignConfiglet(clnt, dev, con):
     try:
-        device = clnt.api.get_device_by_mac(dev['mac'])
+        device = clnt.api.get_device_by_serial(dev['serial'])
     except:
         logging.error('Unable to get device information from Cloudvision')
     cfglets = [{'name': dev['hostname'] + '_base', 'key': con['key']}]
